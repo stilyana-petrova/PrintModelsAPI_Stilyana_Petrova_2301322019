@@ -94,6 +94,7 @@ class PrintModelCreate(BaseModel):
     copies: int = Field(gt=0)
     designer_id: int = Field(gt=0)
     category_id: int | None = None
+    difficulty: Literal["easy", "medium", "hard"] = "medium"
 
     @field_validator("name", "instructions")
     @classmethod
@@ -116,6 +117,7 @@ class PrintModelResponse(BaseSchema):
     copies: int
     designer_id: int
     category_id: int | None
+    difficulty: str
 
 
 

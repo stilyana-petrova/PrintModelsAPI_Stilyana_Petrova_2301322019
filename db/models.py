@@ -59,7 +59,10 @@ class PrintModel(Base):
             "copies > 0",
             name="ck_print_models_copies_positive"
         ),
-
+        CheckConstraint(
+            "difficulty IN ('easy', 'medium', 'hard')",
+            name="ck_print_models_difficulty"
+        ),
     )
 
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -67,7 +70,11 @@ class PrintModel(Base):
     instructions: Mapped[str] = mapped_column(Text)
     print_time: Mapped[int] = mapped_column()
     copies: Mapped[int] = mapped_column()
-
+    difficulty: Mapped[str] = mapped_column(
+        String(10),
+        default="medium",
+        server_default="medium"
+    )
 
     designer_id: Mapped[int] = mapped_column(ForeignKey("designers.id"))
     category_id: Mapped[int | None] = mapped_column(
